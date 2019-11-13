@@ -38,9 +38,9 @@ class Subscription
      */
     public function __construct(
         string $endpoint,
-        ?string $publicKey = null,
-        ?string $authToken = null,
-        ?string $contentEncoding = null
+        string $publicKey = null,
+        string $authToken = null,
+        string $contentEncoding = null
     ) {
         $this->endpoint = $endpoint;
 
@@ -89,7 +89,7 @@ class Subscription
     /**
      * @return null|string
      */
-    public function getPublicKey(): ?string
+    public function getPublicKey(): string
     {
         return $this->publicKey;
     }
@@ -97,7 +97,7 @@ class Subscription
     /**
      * @return null|string
      */
-    public function getAuthToken(): ?string
+    public function getAuthToken(): string
     {
         return $this->authToken;
     }
@@ -105,7 +105,7 @@ class Subscription
     /**
      * @return null|string
      */
-    public function getContentEncoding(): ?string
+    public function getContentEncoding(): string
     {
         return $this->contentEncoding;
     }

@@ -57,7 +57,7 @@ final class VAPIDTest extends PHPUnit\Framework\TestCase
      *
      * @throws ErrorException
      */
-    public function testGetVapidHeaders(string $audience, array $vapid, string $contentEncoding, int $expiration, string $expectedAuthorization, ?string $expectedCryptoKey)
+    public function testGetVapidHeaders(string $audience, array $vapid, string $contentEncoding, int $expiration, string $expectedAuthorization, string $expectedCryptoKey)
     {
         $vapid = VAPID::validate($vapid);
         $headers = VAPID::getVapidHeaders(

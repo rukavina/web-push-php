@@ -37,7 +37,7 @@ final class EncryptionTest extends PHPUnit\Framework\TestCase
 
         $localPrivateKeyObject = PrivateKey::create(gmp_init(bin2hex($localPrivateKey), 16));
         $curve = NistCurve::curve256();
-        [$localPublicKeyObjectX, $localPublicKeyObjectY] = Utils::unserializePublicKey($localPublicKey);
+        list($localPublicKeyObjectX, $localPublicKeyObjectY) = Utils::unserializePublicKey($localPublicKey);
         $localPublicKeyObject = $curve->getPublicKeyFrom(
             gmp_init(bin2hex($localPublicKeyObjectX), 16),
             gmp_init(bin2hex($localPublicKeyObjectY), 16)

@@ -21,8 +21,8 @@ use Jose\Component\Core\Util\Ecc\PublicKey;
 
 class Encryption
 {
-    public const MAX_PAYLOAD_LENGTH = 4078;
-    public const MAX_COMPATIBILITY_PAYLOAD_LENGTH = 3052;
+    const MAX_PAYLOAD_LENGTH = 4078;
+    const MAX_COMPATIBILITY_PAYLOAD_LENGTH = 3052;
 
     /**
      * @param string $payload
@@ -89,7 +89,7 @@ class Encryption
         $localPublicKey = hex2bin(Utils::serializePublicKey($localPublicKeyObject));
 
         // get user public key object
-        [$userPublicKeyObjectX, $userPublicKeyObjectY] = Utils::unserializePublicKey($userPublicKey);
+        list($userPublicKeyObjectX, $userPublicKeyObjectY) = Utils::unserializePublicKey($userPublicKey);
         $userPublicKeyObject = $curve->getPublicKeyFrom(
             gmp_init(bin2hex($userPublicKeyObjectX), 16),
             gmp_init(bin2hex($userPublicKeyObjectY), 16)
@@ -179,7 +179,7 @@ class Encryption
      *
      * @throws \ErrorException
      */
-    private static function createContext(string $clientPublicKey, string $serverPublicKey, $contentEncoding): ?string
+    private static function createContext(string $clientPublicKey, string $serverPublicKey, $contentEncoding): string
     {
         if ($contentEncoding === "aes128gcm") {
             return null;
@@ -211,7 +211,7 @@ class Encryption
      *
      * @throws \ErrorException
      */
-    private static function createInfo(string $type, ?string $context, string $contentEncoding): string
+    private static function createInfo(string $type, string $context, string $contentEncoding): string
     {
         if ($contentEncoding === "aesgcm") {
             if (!$context) {

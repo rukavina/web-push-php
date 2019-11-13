@@ -35,7 +35,7 @@ class Notification
      * @param array $options
      * @param array $auth
      */
-    public function __construct(Subscription $subscription, ?string $payload, array $options, array $auth)
+    public function __construct(Subscription $subscription, string $payload, array $options, array $auth)
     {
         $this->subscription = $subscription;
         $this->payload = $payload;
@@ -54,7 +54,7 @@ class Notification
     /**
      * @return null|string
      */
-    public function getPayload(): ?string
+    public function getPayload(): string
     {
         return $this->payload;
     }
