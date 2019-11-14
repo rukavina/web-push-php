@@ -23,6 +23,11 @@ class Encryption
 {
     const MAX_PAYLOAD_LENGTH = 4078;
     const MAX_COMPATIBILITY_PAYLOAD_LENGTH = 3052;
+    
+    protected static function isPHP71OrNewer()
+    {
+        return version_compare(PHP_VERSION, '7.1.0') >= 0;
+    }
 
     /**
      * @param string $payload
@@ -116,7 +121,7 @@ class Encryption
         // encrypt
         // "The additional data passed to each invocation of AEAD_AES_128_GCM is a zero-length octet sequence."
         $tag = '';
-        if (version_compare(PHP_VERSION, '7.1.0') >= 0) {
+        if (self::isPHP71OrNewer()) {
             $encryptedText = openssl_encrypt($payload, 'aes-128-gcm', $contentEncryptionKey, OPENSSL_RAW_DATA, $nonce, $tag);
         }else{
             $encryptedText = openssl_encrypt($payload, 'aes-128-gcm', $contentEncryptionKey, OPENSSL_RAW_DATA, $nonce);
@@ -240,6 +245,9 @@ class Encryption
      */
     private static function createLocalKeyObject(): array
     {
+        if(!self::isPHP71OrNewer()){
+            return self::createLocalKeyObjectUsingPurePhpMethod();
+        }
         try {
             return self::createLocalKeyObjectUsingOpenSSL();
         } catch (\Exception $e) {
