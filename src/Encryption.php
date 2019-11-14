@@ -124,7 +124,7 @@ class Encryption
         if (self::isPHP71OrNewer()) {
             $encryptedText = openssl_encrypt($payload, 'aes-128-gcm', $contentEncryptionKey, OPENSSL_RAW_DATA, $nonce, $tag);
         }else{
-            $encryptedText = openssl_encrypt($payload, 'aes-128-gcm', $contentEncryptionKey, OPENSSL_RAW_DATA, $nonce);
+            list($encryptedText, $tag) = \AESGCM\AESGCM::encrypt($contentEncryptionKey, $nonce, $payload, '');
         }
         
         // return values in url safe base64

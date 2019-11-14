@@ -27,7 +27,8 @@
     "lib-openssl": "*",
     "guzzlehttp/guzzle": "~5.0",
     "web-token/jwt-signature": "^1.0",
-    "web-token/jwt-key-mgmt": "^1.0"
+    "web-token/jwt-key-mgmt": "^1.0",
+    "spomky-labs/php-aes-gcm": "^1.2"
   },
   "autoload": {
     "psr-4" : {
