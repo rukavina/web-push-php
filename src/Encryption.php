@@ -116,8 +116,12 @@ class Encryption
         // encrypt
         // "The additional data passed to each invocation of AEAD_AES_128_GCM is a zero-length octet sequence."
         $tag = '';
-        $encryptedText = openssl_encrypt($payload, 'aes-128-gcm', $contentEncryptionKey, OPENSSL_RAW_DATA, $nonce, $tag);
-
+        if (version_compare(PHP_VERSION, '7.1.0') >= 0) {
+            $encryptedText = openssl_encrypt($payload, 'aes-128-gcm', $contentEncryptionKey, OPENSSL_RAW_DATA, $nonce, $tag);
+        }else{
+            $encryptedText = openssl_encrypt($payload, 'aes-128-gcm', $contentEncryptionKey, OPENSSL_RAW_DATA, $nonce);
+        }
+        
         // return values in url safe base64
         return [
             'localPublicKey' => $localPublicKey,
