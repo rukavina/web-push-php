@@ -12,6 +12,16 @@
       "homepage": "https://github.com/Minishlink"
     }
   ],
+    "repositories": [
+        {
+            "type":"vcs",
+            "url":"https://github.com/rukavina/jwt-signature"
+        },
+        {
+            "type":"vcs",
+            "url":"https://github.com/rukavina/jwt-key-mgmt"
+        }
+    ],  
   "require": {
     "php": "^7.1",
     "lib-openssl": "*",
